@@ -6,13 +6,14 @@ public class Entry
 
     public void Display()
     {
-        if (_date != "" || _prompText != "" || _entryText != "")
+        if (_date == "" && _prompText == "" && _entryText == "")
         {
             Console.WriteLine($"An error occurred...Sorry!");
         }
         else
         {
-            Console.WriteLine($"Date: {_date} -- Prompt: {_prompText} /n {_entryText}");
+            Console.WriteLine($"Date: {_date} - Prompt: {_prompText} - \n{_entryText}");
         }
     }
+
 }

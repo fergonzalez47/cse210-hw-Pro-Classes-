@@ -20,9 +20,9 @@ public class Journal
         }
     }
 
-    public void SaveToFile(String file)
+    public void SaveToFile(string file)
     {
-        Console.WriteLine("SaveToFile() Working");
+        Console.WriteLine("Saving to file...");
         if (!string.IsNullOrEmpty(file))
         {
             string fileName = file;
@@ -31,7 +31,7 @@ public class Journal
             {
                 foreach (Entry entry in _entries)
                 {
-                    myFile.WriteLine(entry);
+                    myFile.WriteLine($"Date: {entry._date} - Prompt: {entry._prompText} - \n {entry._entryText}");
                 }
             }
         }
@@ -39,29 +39,32 @@ public class Journal
         {
             Console.WriteLine("The file name can't be empty!");
         }
-
     }
+
 
     public void LoadFromFile(string file)
     {
         if (!string.IsNullOrEmpty(file) && File.Exists(file))
         {
-            _entries.Clear();
+            // _entries.Clear();
 
             string[] lines = File.ReadAllLines(file);
 
             foreach (string line in lines)
             {
-                string[] parts = line.Split(',');
-                
+                string[] parts = line.Split(new[] { " - Prompt: ", " - \n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (parts.Length == 3)
+                {
                     Entry entry = new Entry
                     {
-                        _date = parts[0],
+                        _date = parts[0].Substring("Date: ".Length),
                         _prompText = parts[1],
                         _entryText = parts[2]
                     };
 
                     _entries.Add(entry);
+                }
             }
         }
         else
@@ -69,6 +72,7 @@ public class Journal
             Console.WriteLine("Invalid file name or file does not exist.");
         }
     }
+
 
 }
 

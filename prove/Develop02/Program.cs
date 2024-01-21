@@ -15,7 +15,7 @@ class Program
         prompt._prompts.Add("If I had one thing I could do over today, what would it be?");
 
         Console.WriteLine("Welcome to the Journal Program...");
-
+        Journal journal = new Journal();
         while (condition != -1)
         {
             Console.WriteLine("Please select one of the following options");
@@ -26,48 +26,58 @@ class Program
             Console.WriteLine("(0) - Quit");
             Console.Write("What would you like to do?:  ");
             string optionStr = Console.ReadLine();
-            int option = int.Parse(optionStr);
 
-            Journal journal = new Journal();
-            if (option == 0)
+            if (int.TryParse(optionStr, out int option))
             {
-                condition = -1;
+
+                if (option == 0)
+                {
+                    condition = -1;
+                }
+                else if (option == 1)
+                {
+
+                    Entry entry = new Entry();
+                    entry._prompText = prompt.GetRandomPrompt();
+                    Console.WriteLine($"{entry._prompText}");
+
+                    //Assigning the values to the Object
+                    string textEntry = Console.ReadLine();
+                    entry._entryText = textEntry;
+
+                    journal.AddEntry(entry);
+
+                }
+                else if (option == 2)
+                {
+
+                    journal.DisplayAll();
+
+                }
+
+                else if (option == 3)
+                {
+                    Console.Write("Name if the File: ");
+                    string filename = Console.ReadLine();
+                    journal.LoadFromFile(filename);
+                }
+
+                else if (option == 4)
+                {
+                    Console.Write("Name if the File: ");
+                    string filename = Console.ReadLine();
+
+                    journal.SaveToFile(filename);
+                }
             }
-            else if (option == 1)
+            else
             {
-
-                Entry entry = new Entry();
-                entry._prompText = prompt.GetRandomPrompt();
-                Console.WriteLine($"{entry._prompText}");
-
-                //Assigning the values to the Object
-                string textEntry = Console.ReadLine();
-                entry._entryText = textEntry;
-
-                journal.AddEntry(entry);
-
-            }
-            else if (option == 2)
-            {
-
-                journal.DisplayAll();
-
-            }
-
-            else if (option == 3)
-            {
-                Console.Write("Name if the File: ");
-                string filename = Console.ReadLine();
-                journal.LoadFromFile(filename);
-            }
-
-            else if (option == 4)
-            {
-                Console.Write("Name if the File: ");
-                string filename = Console.ReadLine();
                 
-                journal.SaveToFile(filename);
+                Console.WriteLine("Invalid input. Please enter a valid number.");
             }
+
+
+
 
 
         }
