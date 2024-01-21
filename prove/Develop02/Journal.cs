@@ -14,9 +14,18 @@ public class Journal
 
     public void DisplayAll()
     {
-        foreach (Entry entry in _entries)
+        Console.WriteLine("\n");
+        if (_entries.Count > 0)
         {
-            entry.Display();
+            foreach (Entry entry in _entries)
+            {
+                entry.Display();
+            }
+        }
+        else
+        {
+            Console.WriteLine($"An error occurred...Sorry!");
+            Console.WriteLine($"There are no lines to show");
         }
     }
 
@@ -31,7 +40,8 @@ public class Journal
             {
                 foreach (Entry entry in _entries)
                 {
-                    myFile.WriteLine($"Date: {entry._date} - Prompt: {entry._prompText} - \n {entry._entryText}");
+                    // myFile.WriteLine($"Date: {entry._date} - Prompt: {entry._prompText} - \n {entry._entryText}");
+                    myFile.WriteLine($"{entry._date}~{entry._prompText}~{entry._entryText}");
                 }
             }
         }
@@ -46,32 +56,40 @@ public class Journal
     {
         if (!string.IsNullOrEmpty(file) && File.Exists(file))
         {
-             _entries.Clear();
+            _entries.Clear();
 
-            string[] lines = File.ReadAllLines(file);
+            string[] lines = System.IO.File.ReadAllLines(file);
 
             foreach (string line in lines)
             {
-                string[] parts = line.Split(new[] { " - Prompt: ", " - \n" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] parts = line.Split("~");
 
-                if (parts.Length == 3)
+                if (parts.Length >= 3)
                 {
                     Entry entry = new Entry
                     {
-                        _date = parts[0].Substring("Date: ".Length),
+                        _date = parts[0],
                         _prompText = parts[1],
                         _entryText = parts[2]
                     };
 
                     _entries.Add(entry);
                 }
+                else
+                {
+                    Console.WriteLine($"Invalid entry format: {line}");
+                }
+
             }
+
+            Console.WriteLine("File loaded successfully.");
         }
         else
         {
             Console.WriteLine("Invalid file name or file does not exist.");
         }
     }
+
 
 
 }

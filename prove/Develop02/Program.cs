@@ -4,6 +4,7 @@ using System;
 //I used validation if the user enter a letter as a option;
 //I also used conditions to return to the terminal either there is an error or not when reading the file
 // I am using the Date time Object directly in the class Entry
+//Verification if a filename exits or not
 class Program
 {
     static void Main(string[] args)
@@ -61,14 +62,14 @@ class Program
 
                 else if (option == 3)
                 {
-                    Console.Write("Name if the File: ");
+                    Console.Write("Name of the File: ");
                     string filename = Console.ReadLine();
                     journal.LoadFromFile(filename);
                 }
 
                 else if (option == 4)
                 {
-                    Console.Write("Name if the File: ");
+                    Console.Write("Name of the File: ");
                     string filename = Console.ReadLine();
 
                     journal.SaveToFile(filename);
