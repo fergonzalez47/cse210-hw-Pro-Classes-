@@ -46,7 +46,7 @@ public class Journal
     {
         if (!string.IsNullOrEmpty(file) && File.Exists(file))
         {
-            // _entries.Clear();
+             _entries.Clear();
 
             string[] lines = File.ReadAllLines(file);
 
