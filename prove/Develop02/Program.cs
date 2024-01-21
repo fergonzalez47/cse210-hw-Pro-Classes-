@@ -1,5 +1,8 @@
 using System;
 
+
+//I used validation if the user enter a letter as a option;
+//
 class Program
 {
     static void Main(string[] args)
