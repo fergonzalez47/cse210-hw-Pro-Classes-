@@ -2,7 +2,8 @@ using System;
 
 
 //I used validation if the user enter a letter as a option;
-//
+//I also used conditions to return to the terminal either there is an error or not when reading the file
+// I am using the Date time Object directly in the class Entry
 class Program
 {
     static void Main(string[] args)
