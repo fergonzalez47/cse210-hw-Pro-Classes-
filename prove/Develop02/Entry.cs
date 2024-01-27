@@ -1,8 +1,8 @@
 public class Entry
 {
-    public String _date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-    public String _prompText = "";
-    public String _entryText = "";
+    public string _date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    public string _prompText = "";
+    public string _entryText = "";
 
     public void Display()
     {
