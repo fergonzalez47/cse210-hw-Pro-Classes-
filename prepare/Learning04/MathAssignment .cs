@@ -12,8 +12,9 @@ public class MathAssignment : Assignment
     {
         _textBookSection = textBookSection;
         _problems = problems;
-}
-    public string GetHomeworkList() {
+    }
+    public string GetHomeworkList()
+    {
         return $"Section {_textBookSection} - Problems {_problems}";
     }
 }
