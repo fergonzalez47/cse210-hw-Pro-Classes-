@@ -6,9 +6,6 @@ public class BreathingActivity : Activity
     {
         DateTime loopTime = DateTime.Now.AddSeconds(GetSeconds());
         Random random = new Random();
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        ShowSpinner(5);
 
         while (DateTime.Now < loopTime)
         {

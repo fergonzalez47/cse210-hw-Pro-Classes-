@@ -61,6 +61,9 @@ public class Activity
                 Console.WriteLine("Invalid input. Please enter seconds in valid number. Example: 45");
             }
         }
+        Console.Clear();
+        Console.WriteLine("Get ready...");
+        ShowSpinner(5);
     }
 
         public void DisplayEndingMessage()
