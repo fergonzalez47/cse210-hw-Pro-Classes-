@@ -19,12 +19,12 @@ public abstract class Goal
 
     public virtual string GetDetailsString() {
 
-        bool condition = IsCompleted();
         string check = " ";
 
-        if (condition == true)
+        if (IsCompleted())
         {
             check = "X";
+            
         }
 
 

@@ -77,7 +77,7 @@ public class GoalManager
     }
     public void SetScore(int score)
     {
-        _score = score;
+        _score += score;
     }
     public void DisplayPlayerInfo()
 
@@ -86,9 +86,10 @@ public class GoalManager
     }
     public void ListGoalNames()
     {
-        foreach (Goal goal in _goals)
+        for (int i = 0; i < _goals.Count; i++)
         {
-            Console.WriteLine($"{goal.GetShortName()}");
+            Goal goal = _goals[i];
+            Console.WriteLine($"{i + 1}. {goal.GetShortName()}");
         }
     }
 
@@ -136,8 +137,9 @@ public class GoalManager
             {
                 Console.Write("How many times does this goal need to be accomplished for a bonus? ");
                 string goalTarget = Console.ReadLine();
-                if (int.TryParse(goalTarget, out int goalTargetInt)) {
-            
+                if (int.TryParse(goalTarget, out int goalTargetInt))
+                {
+
                     Console.Write("What is the bonus for accomplishing it that many times? ");
                     string goalBonus = Console.ReadLine();
                     if (int.TryParse(goalBonus, out int goalBonusInt))
@@ -145,11 +147,13 @@ public class GoalManager
                         ChecklistGoal goal = new ChecklistGoal(goalName, goalDescription, goalPoints, int.Parse(goalTarget), int.Parse(goalBonus));
                         _goals.Add(goal);
                     }
-                    else {
+                    else
+                    {
                         Console.Write("Bonus need to be a number. Please repeat ");
                     }
                 }
-                else {
+                else
+                {
                     Console.Write("Times need to be in number format. Please repeat ");
                 }
             }
@@ -163,7 +167,20 @@ public class GoalManager
 
     public void RecordEvent()
     {
-
+        ListGoalNames();
+        Console.Write("Which goal did you accomplish? ");
+        string strGoal = Console.ReadLine();
+        int numGoal = int.Parse(strGoal);
+        if ((numGoal - 1) > _goals.Count)
+        {
+            Console.Write("There is no goal with that number");
+        }
+        else {
+            _goals[numGoal - 1].RecordEvent();
+            SetScore(int.Parse(_goals[numGoal -1].GetPoints()));
+            Console.Write($"You now have {GetScore()} points");
+            Console.Write("");
+        }
     }
     public void SaveGoals(string file)
     {
@@ -174,6 +191,7 @@ public class GoalManager
 
             using (StreamWriter myFile = new StreamWriter(fileName))
             {
+                myFile.WriteLine($"{GetScore()}");
                 foreach (Goal goal in _goals)
                 {
                     myFile.WriteLine($"{goal.GetStringRepresentation()}");
@@ -193,8 +211,9 @@ public class GoalManager
 
             string[] lines = System.IO.File.ReadAllLines(file);
 
+            SetScore(int.Parse(lines[0]));
             foreach (string line in lines)
-            {
+            {   
                 string[] typeOfGoal = line.Split(":");
                 if (typeOfGoal[0] == "SimpleGoal")
                 {
@@ -211,7 +230,8 @@ public class GoalManager
                         Console.WriteLine($"Invalid entry format: {parts}");
                     }
                 }
-                else if(typeOfGoal[0] == "EternalGoal") {
+                else if (typeOfGoal[0] == "EternalGoal")
+                {
                     string[] parts = typeOfGoal[1].Split(",");
 
                     if (parts.Length >= 3)
@@ -231,6 +251,7 @@ public class GoalManager
                     if (parts.Length >= 6)
                     {
                         ChecklistGoal goal = new ChecklistGoal(parts[0], parts[1], parts[2], int.Parse(parts[4]), int.Parse(parts[3]));
+                        goal.SetAmountCompleted(int.Parse(parts[5]));
                         _goals.Add(goal);
                     }
                     else
@@ -238,7 +259,7 @@ public class GoalManager
                         Console.WriteLine($"Invalid entry format: {parts}");
                     }
                 }
-            
+
             }
 
             Console.WriteLine("File loaded successfully.");

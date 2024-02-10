@@ -1,0 +1,3 @@
+SimpleGoal:Make the dinner,I want to eat bread ,10,False
+EternalGoal:read scritures,every day,300
+ChecklistGoal:exerise every day,for ever week,122,10,100,0

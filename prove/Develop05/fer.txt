@@ -1,0 +1,4 @@
+140
+SimpleGoal:complete project,finally complete my whole project,50,True
+EternalGoal:Read scriptures,every day,60
+ChecklistGoal:Test the program,testing to see if is is working,30,100,3,3

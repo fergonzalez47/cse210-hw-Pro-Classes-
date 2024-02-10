@@ -8,6 +8,7 @@ public class ChecklistGoal : Goal
     {
         _target = target;
         _bonus = bonus;
+        _amountCompleted = 0;
     }
     public override string GetDetailsString() {
         bool condition = IsCompleted();
@@ -24,11 +25,27 @@ public class ChecklistGoal : Goal
 
     public override void RecordEvent()
     {
-
+        SetAmountCompleted(1);
+        if (IsCompleted())
+        {
+            int totalPoints = GetBonus() + int.Parse(GetPoints());
+            Console.WriteLine($"Congratulations! You have earned {totalPoints} points!");
+        }
+        else {
+            Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!");
+        }
+        Console.WriteLine("");
     }
     public override bool IsCompleted()
     {
-        return false;
+        if (GetTarget()  == GetAmountCompleted())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public override string GetStringRepresentation()
     {
@@ -36,17 +53,21 @@ public class ChecklistGoal : Goal
         return $"ChecklistGoal:{GetShortName()},{GetDescription()},{GetPoints()},{GetBonus()},{GetTarget()},{GetAmountCompleted()}";
     }
 
-    public string GetAmountCompleted()
+    public int GetAmountCompleted()
     {
-        return $"{_amountCompleted}";
+        return _amountCompleted;
     }
-    public string GetTarget()
+    public void SetAmountCompleted(int amount)
     {
-        return $"{_target}";
+        _amountCompleted += amount;
     }
-    public string GetBonus()
+    public int GetTarget()
     {
-        return $"{_bonus}";
+        return _target;
+    }
+    public int GetBonus()
+    {
+        return _bonus;
     }
 
 
