@@ -31,21 +31,36 @@ class Program
 
         // Crear objeto Outdoor
         Outdoor outdoorEvent = new Outdoor(
-            "Sunny",              // Weather
-            "Picnic in the Park", // Title
-            "Description of the outdoor event", // Description
-            new DateTime(2024, 4, 20), // Date
-            180,                       // Time (in minutes)
-            new Address("789 Park Blvd", "City", "Country", "13579") // Address
+            "Sunny",              
+            "Picnic in the Park", 
+            "Imagine a leisurely afternoon filled with delightful activities such as friendly frisbee matches, serene nature walks, or even a captivating storytelling session under the shade of ancient trees. Indulge in delicious picnic treats while soaking in the tranquil ambiance and sharing laughter with loved ones. Whether it's a spirited game of volleyball, a peaceful stroll by the lake, or simply lounging on a blanket while enjoying a good book, our Picnic in the Park promises a rejuvenating experience for all.", // Description
+            new DateTime(2024, 4, 20), 
+            180,                     
+            new Address("789 Park Blvd", "City", "Country", "13579") 
         );
 
-        // Imprimir la información completa de cada evento
+        Console.WriteLine("****** Lecture *****");
         lectureEvent.GetFullInformation();
-        Console.WriteLine();
+        Console.WriteLine("");
+        Console.WriteLine($"{lectureEvent.GetShortDescription()}");
+        Console.WriteLine("");
+        Console.WriteLine($"{lectureEvent.GetStandardDetails()}");
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("****** Reception *****");
         receptionEvent.GetFullInformation();
-        Console.WriteLine();
+        Console.WriteLine("");
+        Console.WriteLine($"{receptionEvent.GetShortDescription()}");
+        Console.WriteLine("");
+        Console.WriteLine($"{receptionEvent.GetStandardDetails()}");
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("****** Outdor *****");
         outdoorEvent.GetFullInformation();
-
+        Console.WriteLine("");
+        Console.WriteLine($"{outdoorEvent.GetShortDescription()}");
+        Console.WriteLine("");
+        Console.WriteLine($"{outdoorEvent.GetStandardDetails()}");
 
 
 

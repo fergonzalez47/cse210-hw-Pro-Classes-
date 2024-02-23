@@ -19,13 +19,13 @@ public class Event
     }
     public string GetStandardDetails()
     {
-        return $"Title: {GetTitle()}\n Description: {GetDescription()}\n Date: {GetDate()}\n Time: {GetTime()}\n Address: {_address.GetFullAddress()}";
+        return $"Standard Description: \n Title: {GetTitle()}\n Description: {GetDescription()}\n Date: {GetDate()}\n Time: {GetTime()}\n Address: {_address.GetFullAddress()}";
     }
 
 
     public string GetShortDescription()
     {
-        return $"- Title: {GetTitle()}\n - Date: {GetDate()}\n ";
+        return $"Short Description: \n - Title: {GetTitle()}\n - Date: {GetDate()}\n ";
     }
 
 
